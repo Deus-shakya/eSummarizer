@@ -8,28 +8,33 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/OldUI")
-public class HomeController {
+@RequestMapping("/NewUI")
+public class NewUIController {
     @GetMapping({ "", "/index" })
     public String home(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         boolean isAuthenticated = auth != null && auth.isAuthenticated() && !auth.getName().equals("anonymousUser");
         model.addAttribute("isAuthenticated", isAuthenticated);
-        return "OldUI/index";
+        return "NewUI/index";
     }
 
     @GetMapping("/login")
     public String login() {
-        return "OldUI/login";
+        return "NewUI/login";
     }
 
     @GetMapping("/signup")
     public String signup() {
-        return "OldUI/signup";
+        return "NewUI/signup";
     }
 
     @GetMapping("/profile")
     public String profile() {
-        return "OldUI/profile";
+        return "NewUI/profile";
+    }
+
+    @GetMapping("/navbar")
+    public String navbar() {
+        return "NewUI/navbar";
     }
 }

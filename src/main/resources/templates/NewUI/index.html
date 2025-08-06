@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>AI Text Summarizer</title>
+    <link rel="stylesheet" href="/NewUI/CSS/navbar.css"/>
+    <link rel="stylesheet" href="/NewUI/CSS/index.css"/>
+</head>
+<body>
+<!-- Navigation Bar -->
+<div th:replace="NewUI/navbar :: navbar"></div>
+
+<div class="main-content">
+    <div class="container">
+        <div class="controls">
+            <div class="mode-container">
+                <span>Modes:</span>
+                <div class="modes">
+                    <button class="mode-btn active" data-mode="paragraph">
+                        Paragraph
+                    </button>
+                    <button class="mode-btn" data-mode="bullets">
+                        Bullet Points
+                    </button>
+                    <button class="mode-btn" data-mode="classify">Classify</button>
+
+                    <button class="mode-btn" data-mode="abstractive">
+                        Abstractive
+                    </button>
+                </div>
+            </div>
+
+            <div class="length-control">
+                <span class="length-label">Length:</span>
+                <div class="slider-container">
+                    <span style="font-size: 12px; color: #718096">Short</span>
+                    <input
+                            type="range"
+                            class="slider"
+                            min="1"
+                            max="3"
+                            value="2"
+                            id="lengthSlider"
+                    />
+                    <span style="font-size: 12px; color: #718096">Long</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="input-section">
+            <textarea
+                    class="textarea"
+                    id="inputText"
+                    placeholder="Enter or paste your text here and press 'Summarize' to get an AI-generated summary..."
+            ></textarea>
+
+                <div class="upload-section">
+                    <label class="upload-btn" for="fileInput">
+                        <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                        >
+                            <path
+                                    d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"
+                            />
+                        </svg>
+                        Upload Document
+                    </label>
+                    <input
+                            type="file"
+                            id="fileInput"
+                            style="display: none"
+                            accept=".txt,.doc,.docx,.pdf"
+                    />
+                </div>
+
+                <div class="actions">
+                    <button class="summarize-btn" id="summarizeBtn">
+                        Summarize Text
+                    </button>
+                    <div class="word-count" id="wordCount">0 sentences • 0 words</div>
+                </div>
+            </div>
+
+            <div class="output-section" id="outputSection">
+                <span class="output-title" style="font-size: 12px">Generated Summary</span>
+
+                <div class="output-header">
+                   <div class="output-titles">
+                       <span class="output-title"  style="font-size: 14px">Classification: Entertainment</span>
+
+                   </div>
+                    <div class="copy-container">
+                        <button class="copy-btn" id="copyBtn">Copy</button>
+                    </div>
+                </div>
+                <div class="output-text" id="outputText">
+                    <div class="loading">
+                        Your summary will appear here once you click "Summarize Text"
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/NewUI/JS/navbar.js"></script>
+<script src="/NewUI/JS/index.js"></script>
+</body>
+</html>

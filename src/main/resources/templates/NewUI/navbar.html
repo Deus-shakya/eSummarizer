@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gistify</title>
+    <link rel="stylesheet" href="/NewUI/CSS/navbar.css" />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" th:fragment="navbar">
+      <div class="nav-container">
+        <a href="#" class="nav-logo">
+            <span class="nav-logo-text"><strong>G</strong><light>istify</light></span>
+        </a>
+        <!-- hamrbugerb -->
+        <div
+          class="mobile-menu-toggle"
+          id="mobile-menu-toggle"
+          aria-label="Open menu"
+          tabindex="0"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <ul class="nav-links" id="nav-links">
+          <li><a href="/NewUI/index" class="nav-link">Home</a></li>
+          <li><a href="/NewUI/features" class="nav-link">Features</a></li>
+          <li><a href="/NewUI/about" class="nav-link">About</a></li>
+          <li><a href="/NewUIcontact" class="nav-link">Contact</a></li>
+          <li>
+            <div class="nav-auth">
+              <a href="/NewUI/login" class="btn-primary">Login</a>
+              <a href="/NewUI/signup" class="btn-primary">Sign Up</a>
+            </div>
+          </li>
+          <li>
+            <button
+              id="theme-toggle"
+              aria-label="Toggle dark mode"
+              class="btn-secondary"
+              style="margin-left: 10px"
+            >
+              🌙
+            </button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <script src="/NewUI/JS/navbar.js"></script>
+  </body>
+</html>

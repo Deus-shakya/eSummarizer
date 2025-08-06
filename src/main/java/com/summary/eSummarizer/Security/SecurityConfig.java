@@ -49,23 +49,30 @@ public class SecurityConfig {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(form -> form
-                        .loginPage("/login")  // Custom login page
+                        .loginPage("/OldUI/login") // Use your actual login page
                         .loginProcessingUrl("/login")
                         .usernameParameter("email")
-                        .defaultSuccessUrl("/index", true)  // Redirect to home page after login
-                        .failureUrl("/login?error=true")
-                        .permitAll()
-                )
+                        .defaultSuccessUrl("/OldUI/index", true) // Redirect to correct index
+                        .failureUrl("/OldUI/login?error=true")
+                        .permitAll())
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/index?logout")
+                        .logoutSuccessUrl("/OldUI/index?logout") // Redirect to correct index
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID"))
                 .authorizeHttpRequests(registry -> {
-                    registry.requestMatchers("/", "/index", "/index.html", "/signup", "/css/**", "/js/**").permitAll(); // Public access to index and resources
-                    registry.requestMatchers("/summarize").permitAll();  // Summarization accessible to anonymous users
-                    registry.requestMatchers("/api/profile/**").authenticated();  // Profile API requires authentication
-                    registry.anyRequest().authenticated();  // All other requests need authentication
+                    registry.requestMatchers(
+                            "/", "/index", "/index.html", "/signup",
+                            "/css/**", "/js/**",
+                            "/api/classification/", "/api/classification/classify",
+                            "/api/summarization", "/api/summarization/summarize",
+                            "/OldUI/index", "/OldUI/**", // OldUI templates and resources
+                            "/NewUI/index", "/NewUI/**", // NewUI templates and resources
+                            "/static/OldUI/**", "/static/NewUI/**" // Static resources
+                    ).permitAll();
+                    registry.requestMatchers("/summarize").permitAll();
+                    registry.requestMatchers("/api/profile/**").authenticated();
+                    registry.anyRequest().authenticated();
                 })
                 .build();
     }
