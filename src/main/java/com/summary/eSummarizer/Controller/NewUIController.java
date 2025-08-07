@@ -37,4 +37,20 @@ public class NewUIController {
     public String navbar() {
         return "NewUI/navbar";
     }
+
+    @GetMapping("/about")
+    public String about() {
+        return "NewUI/about";
+    }
+
+    @GetMapping("/contact")
+    public String contact() {
+        return "NewUI/contact";
+    }
+
+    @GetMapping("/features")
+    public String features() {
+        return "NewUI/features";
+    }
+
 }

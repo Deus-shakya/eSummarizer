@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Contact Us - SummarizeBot</title>
+    <link rel="stylesheet" href="/NewUI/CSS/navbar.css" />
+    <link rel="stylesheet" href="/NewUI/CSS/contact.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- Navigation Bar -->
+<div th:replace="NewUI/navbar :: navbar"></div>
+<header class="hero">
+    <div class="hero-content">
+        <h1 class="hero-title">Get in Touch</h1>
+        <p class="hero-subtitle">We'd love to hear your thoughts, suggestions, or questions!</p>
+    </div>
+</header>
+
+<section class="contact-section">
+    <div class="contact-container">
+        <form class="contact-form" id="contactForm">
+            <h2>Send Us a Message</h2>
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" placeholder="Enter your name" required />
+            </div>
+            <div class="form-group">
+                <label for="email">Your Email</label>
+                <input type="email" id="email" placeholder="you@example.com" required />
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" rows="5" placeholder="Write your message..." required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+
+        <div class="contact-info">
+            <div class="info-card">
+                <h3>Email</h3>
+                <p>support@summarizebot.com</p>
+            </div>
+            <div class="info-card">
+                <h3>Phone</h3>
+                <p>+1 (123) 456-7890</p>
+            </div>
+            <div class="info-card">
+                <h3>Address</h3>
+                <p>123 AI Street, Kathmandu, Nepal</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="footer-section">
+    <p>Return to <a href="#" onclick="goToHome()">Home Page</a></p>
+</section>
+<script src="/NewUI/JS/navbar.js"></script>
+<script src="/NewUI/JS/contact.js"></script>
+</body>
+</html>

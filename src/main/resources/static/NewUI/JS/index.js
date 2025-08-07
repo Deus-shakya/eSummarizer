@@ -5,12 +5,11 @@ const summarizeBtn = document.getElementById("summarizeBtn");
 const outputSection = document.getElementById("outputSection");
 const outputText = document.getElementById("outputText");
 const copyBtn = document.getElementById("copyBtn");
-const modeButtons = document.querySelectorAll(".mode-btn");
 const lengthSlider = document.getElementById("lengthSlider");
 const fileInput = document.getElementById("fileInput");
 
-let currentMode = "paragraph";
-let summaryLength = 2;
+let typingTimeouts = [];
+let isClearing = false;
 
 // Update word count
 function updateWordCount() {
@@ -22,14 +21,7 @@ function updateWordCount() {
   wordCount.textContent = `${sentences} sentences • ${words} words`;
 }
 
-// Mode selection
-modeButtons.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    modeButtons.forEach((b) => b.classList.remove("active"));
-    btn.classList.add("active");
-    currentMode = btn.dataset.mode;
-  });
-});
+updateWordCount();
 
 // Length slider
 lengthSlider.addEventListener("input", (e) => {
@@ -49,70 +41,34 @@ fileInput.addEventListener("change", (e) => {
   }
 });
 
-// Simple text summarization function
-function summarizeText(text, mode, length) {
-  const sentences = text.split(/[.!?]+/).filter((s) => s.trim().length > 0);
+// Event listeners
+inputText.addEventListener("input", updateWordCount);
+summarizeBtn.addEventListener("click", function (e) {
+  e.preventDefault(); // Prevent form submission
+  summarize();
+});
+copyBtn.addEventListener("click", copyToClipboard);
 
-  if (sentences.length === 0) return "No text to summarize.";
-
-  // Simple extractive summarization - take first, middle, and important sentences
-  let numSentences;
-  switch (length) {
-    case 1:
-      numSentences = Math.max(1, Math.floor(sentences.length * 0.2));
-      break;
-    case 2:
-      numSentences = Math.max(2, Math.floor(sentences.length * 0.4));
-      break;
-    case 3:
-      numSentences = Math.max(3, Math.floor(sentences.length * 0.6));
-      break;
+// clear all timeouts
+function clearAllTimeouts() {
+  for (const timeoutId of typingTimeouts) {
+    clearTimeout(timeoutId);
+    isClearing = false;
   }
-
-  numSentences = Math.min(numSentences, sentences.length);
-
-  let selectedSentences = [];
-
-  // Always include first sentence
-  selectedSentences.push(sentences[0]);
-
-  if (numSentences > 1) {
-    // Add middle sentences
-    const step = Math.floor(sentences.length / numSentences);
-    for (let i = 1; i < numSentences && i * step < sentences.length; i++) {
-      selectedSentences.push(sentences[i * step]);
-    }
-  }
-
-  // Format based on mode
-  switch (mode) {
-    case "bullets":
-      return selectedSentences.map((s) => "• " + s.trim() + ".").join("\n");
-    case "custom":
-      return selectedSentences.join(". ") + ".";
-    default:
-      return selectedSentences.join(". ") + ".";
-  }
+  typingTimeouts = [];
 }
 
-// Summarize function
-function summarize() {
-  const text = inputText.value.trim();
-
-  if (!text) {
-    alert("Please enter some text to summarize.");
-    return;
+// type writer function
+function typeWriter(text, element, index, speed) {
+  if (isClearing) return;
+  if (index < text.length) {
+    element.innerHTML += text.charAt(index);
+    index++;
+    const timeoutId = setTimeout(function () {
+      typeWriter(text, element, index, speed);
+    }, speed);
+    typingTimeouts.push(timeoutId);
   }
-
-  // Show loading
-  outputText.innerHTML =
-    '<div class="loading">Generating your summary...</div>';
-
-  // Simulate processing time
-  setTimeout(() => {
-    const summary = summarizeText(text, currentMode, summaryLength);
-    outputText.textContent = summary;
-  }, 1000);
 }
 
 // Copy to clipboard
@@ -125,19 +81,3 @@ function copyToClipboard() {
     }, 1500);
   });
 }
-
-// Mobile menu toggle
-const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
-const navLinks = document.querySelector(".nav-links");
-
-mobileMenuToggle.addEventListener("click", () => {
-  navLinks.style.display = navLinks.style.display === "flex" ? "none" : "flex";
-});
-
-// Event listeners
-inputText.addEventListener("input", updateWordCount);
-summarizeBtn.addEventListener("click", summarize);
-copyBtn.addEventListener("click", copyToClipboard);
-
-// Initialize
-updateWordCount();
