@@ -1,62 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up - AI Text Summarizer</title>
-    <link rel="stylesheet" href="/NewUI/CSS/navbar.css"/>
-    <link rel="stylesheet" href="/NewUI/CSS/signup.css"/>
-</head>
-<body>
-<!-- Navigation Bar -->
-<div th:replace="NewUI/navbar :: navbar"></div>
-<!-- Auth Container -->
-<div class="auth-container">
-    <div class="auth-card">
+    <link rel="stylesheet" href="/NewUI/CSS/navbar.css" />
+    <link rel="stylesheet" href="/NewUI/CSS/signup.css" />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <div th:replace="NewUI/navbar :: navbar"></div>
+    <!-- Auth Container -->
+    <div class="auth-container">
+      <div class="auth-card">
         <div class="auth-header">
-            <h1 class="auth-title">Create Account</h1>
-            <p class="auth-subtitle">Start your journey with AI-powered text summarization</p>
+          <h1 class="auth-title">Create Account</h1>
+          <p class="auth-subtitle">
+            Start your journey with AI-powered text summarization
+          </p>
         </div>
 
-        <form class="auth-form" onsubmit="handleSignup(event)">
-            <div class="form-group">
-                <label class="form-label" for="signupName">Full Name</label>
-                <input type="text" id="signupName" class="form-input" placeholder="Enter your full name" required/>
-            </div>
+        <form class="auth-form">
+          <div class="form-group">
+            <label class="form-label" for="signupName">User-name</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              class="form-input"
+              placeholder="Enter your user name"
+              required
+            />
+          </div>
 
-            <div class="form-group">
-                <label class="form-label" for="signupEmail">Email Address</label>
-                <input type="email" id="signupEmail" class="form-input" placeholder="Enter your email" required/>
-            </div>
+          <div class="form-group">
+            <label class="form-label" for="signupEmail">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-input"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
 
-            <div class="form-group">
-                <label class="form-label" for="signupPassword">Password</label>
-                <input type="password" id="signupPassword" class="form-input" placeholder="Create a strong password"
-                       required/>
-            </div>
+          <div class="form-group">
+            <label class="form-label" for="signupPassword">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-input"
+              placeholder="Create a strong password"
+              required
+            />
+          </div>
 
-            <div class="form-group">
-                <label class="form-label" for="confirmPassword">Confirm Password</label>
-                <input type="password" id="confirmPassword" class="form-input" placeholder="Confirm your password"
-                       required/>
-            </div>
+          <div class="form-group">
+            <label class="form-label" for="confirmPassword"
+              >Confirm Password</label
+            >
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              class="form-input"
+              placeholder="Confirm your password"
+              required
+            />
+          </div>
 
-            <div class="checkbox-group">
-                <input type="checkbox" id="agreeTerms" required/>
-                <label for="agreeTerms">
-                    I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
-                </label>
-            </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="agreeTerms" required />
+            <label for="agreeTerms">
+              I agree to the <a href="#">Terms of Service</a> and
+              <a href="#">Privacy Policy</a>
+            </label>
+          </div>
 
-            <button type="submit" class="auth-btn">Create Account</button>
+          <button type="submit" class="auth-btn">Create Account</button>
         </form>
 
         <div class="auth-switch">
-            Already have an account? <a href="#" onclick="goToLogin()">Sign in</a>
+          Already have an account? <a href="/NewUI/login">Sign in</a>
         </div>
+      </div>
     </div>
-</div>
-<script src="/NewUI/JS/navbar.js"></script>
-<script src="signup.js"></script>
-</body>
+    <script src="/NewUI/JS/navbar.js"></script>
+    <script src="/NewUI/JS/signup.js"></script>
+  </body>
 </html>

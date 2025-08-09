@@ -49,15 +49,15 @@ public class SecurityConfig {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(form -> form
-                        .loginPage("/OldUI/login") // Use your actual login page
+                        .loginPage("/NewUI/login")
                         .loginProcessingUrl("/login")
                         .usernameParameter("email")
-                        .defaultSuccessUrl("/OldUI/index", true) // Redirect to correct index
-                        .failureUrl("/OldUI/login?error=true")
+                        .defaultSuccessUrl("/NewUI/index", true)
+                        .failureUrl("/NewUI/login?error=true")
                         .permitAll())
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/OldUI/index?logout") // Redirect to correct index
+                        .logoutSuccessUrl("/NewUI/login") // Redirect to correct index
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID"))
                 .authorizeHttpRequests(registry -> {

@@ -1,59 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - AI Text Summarizer</title>
-    <link rel="stylesheet" href="/NewUI/CSS/navbar.css"/>
-    <link rel="stylesheet" href="/NewUI/CSS/login.css"/>
-</head>
-<body>
-<!-- Navigation Bar -->
-<div th:replace="NewUI/navbar :: navbar"></div>
-<!-- Login Section -->
-<div class="auth-container">
-    <div class="auth-card">
+    <link rel="stylesheet" href="/NewUI/CSS/navbar.css" />
+    <link rel="stylesheet" href="/NewUI/CSS/login.css" />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <div th:replace="NewUI/navbar :: navbar"></div>
+    <!-- Login Section -->
+    <div class="auth-container">
+      <div class="auth-card">
         <div class="auth-header">
-            <h1 class="auth-title">Welcome Back</h1>
-            <p class="auth-subtitle">Sign in to your account to continue</p>
+          <h1 class="auth-title">Welcome</h1>
+          <p class="auth-subtitle">Sign in to your account to continue</p>
         </div>
 
-        <form class="auth-form" onsubmit="handleLogin(event)">
-            <div class="form-group">
-                <label class="form-label" for="loginEmail">Email Address</label>
-                <input
-                        type="email"
-                        id="loginEmail"
-                        class="form-input"
-                        placeholder="Enter your email"
-                        required
-                />
-            </div>
+        <div
+          id="loginError"
+          style="color: red; margin-bottom: 10px; display: none"
+        >
+          Invalid email or password. Please try again.
+        </div>
 
-            <div class="form-group">
-                <label class="form-label" for="loginPassword">Password</label>
-                <input
-                        type="password"
-                        id="loginPassword"
-                        class="form-input"
-                        placeholder="Enter your password"
-                        required
-                />
-            </div>
+        <form action="/login" method="post" class="auth-form">
+          <div class="form-group">
+            <label class="form-label" for="loginEmail">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-input"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
 
-            <div class="forgot-password">
-                <a href="#" onclick="showForgotPassword()">Forgot your password?</a>
-            </div>
+          <div class="form-group">
+            <label class="form-label" for="loginPassword">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-input"
+              placeholder="Enter your password"
+              required
+              minlength="8"
+            />
+          </div>
 
-            <button type="submit" class="auth-btn">Sign In</button>
+          <div class="forgot-password">
+            <a href="#" onclick="showForgotPassword()">Forgot your password?</a>
+          </div>
+
+          <button type="submit" class="auth-btn">Log In</button>
         </form>
-
         <div class="auth-switch">
-            Don't have an account? <a href="#" onclick="goToSignup()">Sign up</a>
+          <a href="/NewUI/index">Stay logged out</a>
         </div>
+        <div class="auth-switch">
+          Don't have an account? <a href="/NewUI/signup">Sign up</a>
+        </div>
+      </div>
     </div>
-</div>
-<script src="/NewUI/JS/navbar.js"></script>
-<script src="/NewUI/JS/login.js"></script>
-</body>
+    <script src="/NewUI/JS/navbar.js"></script>
+    <script src="/NewUI/JS/login.js"></script>
+  </body>
 </html>

@@ -11,7 +11,9 @@
     <nav class="navbar" th:fragment="navbar">
       <div class="nav-container">
         <a href="/NewUI/index" class="nav-logo">
-            <span class="nav-logo-text"><strong>G</strong><light>istify</light></span>
+          <span class="nav-logo-text"
+            ><strong>G</strong><light>istify</light></span
+          >
         </a>
         <!-- hamrbugerb -->
         <div
@@ -32,8 +34,32 @@
           <li><a href="/NewUI/contact" class="nav-link">Contact</a></li>
           <li>
             <div class="nav-auth">
-              <a href="/NewUI/login" class="btn-primary">Login</a>
-              <a href="/NewUI/signup" class="btn-primary">Sign Up</a>
+              <!-- Show Sign Up & Login if NOT logged in -->
+              <a
+                href="/NewUI/signup"
+                class="btn-primary"
+                th:if="${not #authorization.expression('isAuthenticated()')}"
+                >Sign Up</a
+              >
+              <a
+                href="/NewUI/login"
+                class="btn-primary"
+                th:if="${not #authorization.expression('isAuthenticated()')}"
+                >Login</a
+              >
+              <!-- Show Profile & Logout if logged in -->
+              <a
+                href="/NewUI/profile"
+                class="btn-primary"
+                th:if="${#authorization.expression('isAuthenticated()')}"
+                >Profile</a
+              >
+              <a
+                href="/logout"
+                class="btn-primary"
+                th:if="${#authorization.expression('isAuthenticated()')}"
+                >Logout</a
+              >
             </div>
           </li>
           <li>
