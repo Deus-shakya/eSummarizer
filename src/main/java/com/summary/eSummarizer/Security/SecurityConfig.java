@@ -65,7 +65,7 @@ public class SecurityConfig {
                             "/", "/index", "/index.html", "/signup",
                             "/css/**", "/js/**",
                             "/api/classification/", "/api/classification/classify",
-                            "/api/summarization", "/api/summarization/summarize",
+                            "/api/summarization", "/api/summarization/summarize","/api/summarization/summarize-abs",
                             "/OldUI/index", "/OldUI/**", // OldUI templates and resources
                             "/NewUI/index", "/NewUI/**", // NewUI templates and resources
                             "/static/OldUI/**", "/static/NewUI/**" // Static resources

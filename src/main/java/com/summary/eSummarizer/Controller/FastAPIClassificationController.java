@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/classification")
 public class FastAPIClassificationController {
@@ -17,7 +19,7 @@ public class FastAPIClassificationController {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @PostMapping("/classify")
-    public Mono<ResponseEntity<String>> classify(@RequestBody ClassificationRequest request) {
+    public Mono<ResponseEntity<Map<String,String>>> classify(@RequestBody ClassificationRequest request) {
         return webClient.post()
                 .uri("/api/v1/classify")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -28,9 +30,11 @@ public class FastAPIClassificationController {
                     try {
                         JsonNode jsonNode = objectMapper.readTree(responseBody);
                         String predictedClass = jsonNode.get("predicted_class").asText();
-                        return ResponseEntity.ok(predictedClass);
+                        System.out.println("this is predicted Class: "+ predictedClass);
+                        return ResponseEntity.ok(Map.of("predictedClass", predictedClass));
+
                     } catch (Exception e) {
-                        return ResponseEntity.internalServerError().body("Failed to parse predicted_class");
+                        return ResponseEntity.internalServerError().body(Map.of("error", "Failed to parse predicted_class"));
                     }
                 });
     }

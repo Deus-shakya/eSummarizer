@@ -21,22 +21,26 @@ async function summarize() {
       case "paragraph":
         response = await fetch("/summarize", {
           method: "POST",
-          headers: { "Content-Type": "text/plain" },
+          headers: { "Content-Type": "application/json" },
           body: text,
         });
         break;
       case "bullets":
         response = await fetch("/summarize/bullets", {
           method: "POST",
-          headers: { "Content-Type": "text/plain" },
+          headers: { "Content-Type": "application/json" },
           body: text,
         });
         break;
       case "abstractive":
-        response = await fetch("/summarize/abst", {
+        response = await fetch("/api/summarization/summarize-abs", {
           method: "POST",
-          headers: { "Content-Type": "text/plain" },
-          body: text,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            text,
+            max_length: 100,
+            min_length: 40,
+          }),
         });
         break;
 
@@ -65,7 +69,7 @@ async function summarize() {
     const summaryInfo = await response.json();
     let cleanedSummary =
       summaryInfo.summarizedText ||
-      summaryInfo.summary ||
+      summaryInfo.predictedClass ||
       "No summary available.";
 
     clearAllTimeouts();

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/summarization")
 public class FastAPISummarizationController {
@@ -17,8 +19,8 @@ public class FastAPISummarizationController {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
 
-    @PostMapping("/summarize")
-    public Mono<ResponseEntity<String>> summarize(@RequestBody SummarizationRequest request) {
+    @PostMapping("/summarize-abs")
+    public Mono<ResponseEntity<Map<String,String>>> summarize(@RequestBody SummarizationRequest request) {
         return webClient.post()
                 .uri("/api/v1/summarize")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -28,10 +30,12 @@ public class FastAPISummarizationController {
                 .map(responseBody -> {
                     try {
                         JsonNode jsonNode = objectMapper.readTree(responseBody);
+                        System.out.println("this is from fastAPIReturned to spring: "+jsonNode);
                         String summary = jsonNode.get("summary").asText();
-                        return ResponseEntity.ok(summary);
+                        return ResponseEntity.ok(Map.of("summarizedText",summary));
                     } catch (Exception e) {
-                        return ResponseEntity.internalServerError().body("Failed to parse summary");
+                        return ResponseEntity.internalServerError().body(Map.of("Error","Failed to process the data"));
+
                     }
                 });
     }
