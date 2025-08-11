@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Profile - Gistify</title>
+    <link rel="stylesheet" href="/NewUI/CSS/navbar.css"/>
+    <link rel="stylesheet" href="/NewUI/CSS/profile.css"/>
+</head>
+<body>
+<div th:replace="NewUI/navbar :: navbar"></div>
+<section class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title">Your Profile</h1>
+        <p class="hero-subtitle">
+            Manage your account settings, view your usage statistics, and
+            customize your SummarizeBot experience.
+        </p>
+    </div>
+</section>
+
+<div class="profile-container">
+    <div class="profile-card">
+        <div class="profile-header">
+            <div class="profile-avatar" id="avatar">JD</div>
+            <div class="profile-info">
+                <h1 id="displayName">John Doe</h1>
+                <p id="displayEmail">john.doe@example.com</p>
+                <p>Member since March 2024</p>
+                <div class="profile-stats">
+                    <div class="stat">
+                        <div class="stat-number">142</div>
+                        <div class="stat-label">Documents Summarized</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">2,847</div>
+                        <div class="stat-label">Words Processed</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">89</div>
+                        <div class="stat-label">Hours Saved</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-card">
+        <div class="section-header" onclick="toggleAccountForm()">
+            <h2 class="section-title">
+                <div class="title-left">
+                    Account Information
+                </div>
+                <span class="dropdown-arrow">▼</span>
+            </h2>
+        </div>
+        <div class="form-content" id="accountFormContent">
+            <form id="profileForm" class="enhanced-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="firstName">
+                            First Name
+                        </label>
+                        <input
+                                type="text"
+                                id="firstName"
+                                class="form-input"
+                                value="John"
+                                placeholder="Enter your first name"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="middleName">
+                            Middle Name
+                        </label>
+                        <input
+                                type="text"
+                                id="middleName"
+                                class="form-input"
+                                placeholder="Enter your middle name (optional)"
+                        />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="lastName">
+                            Last Name
+                        </label>
+                        <input
+                                type="text"
+                                id="lastName"
+                                class="form-input"
+                                value="Doe"
+                                placeholder="Enter your last name"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="username">
+                            Username
+                        </label>
+                        <input
+                                type="text"
+                                id="username"
+                                class="form-input"
+                                value="johndoe123"
+                                placeholder="Choose a unique username"
+                        />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="email">
+                            Email Address
+                        </label>
+                        <input
+                                type="email"
+                                id="email"
+                                class="form-input"
+                                value="john.doe@example.com"
+                                placeholder="Enter your email address"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="phone">
+                            Phone Number
+                        </label>
+                        <input
+                                type="tel"
+                                id="phone"
+                                class="form-input"
+                                value="+1 (555) 123-4567"
+                                placeholder="Enter your phone number"
+                        />
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary enhanced-btn">
+                        Update Profile
+                    </button>
+                    <button
+                            type="button"
+                            class="btn btn-secondary enhanced-btn"
+                            onclick="resetForm()"
+                    >
+                        Reset Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/NewUI/JS/navbar.js"></script>
+<script src="/NewUI/JS/profile.js"></script>
+</body>
+</html>
