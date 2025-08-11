@@ -20,8 +20,28 @@
           </p>
         </div>
 
-        <form class="auth-form">
+        <form
+          class="auth-form"
+          enctype="multipart/form-data"
+          accept="image/jpeg"
+        >
           <div class="form-group">
+            <label for="profileImage" style="cursor: pointer">
+              <img
+                id="profilePreview"
+                src="/NewUI/Images/default-profile.png"
+                alt="Profile"
+              />
+            </label>
+            <input
+              type="file"
+              id="profileImage"
+              name="profileImage"
+              accept="image/*"
+              style="display: none"
+            />
+            <label class="form-label" for="profileImage">Profile image</label>
+
             <label class="form-label" for="signupName">User-name</label>
             <input
               type="text"

@@ -16,6 +16,7 @@ public class UserModel {
     private String email;
 
     private String password;
+    private String profileImageUrl;
 
     // Getters and setters
     public Long getId() {
@@ -48,5 +49,13 @@ public class UserModel {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getProfileImageUrl(String profileImageUrl) {
+        return profileImageUrl;
+    }
+
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
     }
 }

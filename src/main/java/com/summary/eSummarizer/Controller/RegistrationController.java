@@ -5,8 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.summary.eSummarizer.Model.UserModel;
 import com.summary.eSummarizer.Repository.MyAppUserRepository;
@@ -20,22 +21,49 @@ public class RegistrationController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @PostMapping(value = "/signup", consumes = "application/json")
-    public ResponseEntity<?> createUser(@RequestBody UserModel user) {
-        // Check if email already exists
-        if (myAppUserRepository.findByEmail(user.getEmail()).isPresent()) {
+    @PostMapping(value = "/signup", consumes = "multipart/form-data")
+    public ResponseEntity<?> createUser(
+            @RequestParam("username") String username,
+            @RequestParam("email") String email,
+            @RequestParam("password") String password,
+            @RequestParam(value = "profileImage", required = false) MultipartFile profileImage) {
+
+        if (myAppUserRepository.findByEmail(email).isPresent()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("Email already exists");
         }
 
-        // Check password length
-        if (user.getPassword().length() < 8) {
+        if (password.length() < 8) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("Password must be at least 8 characters long");
         }
 
-        // Encrypt the password and save the user
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        String profileImageUrl = null;
+        if (profileImage != null && !profileImage.isEmpty()) {
+            String uploadDir = "uploads";
+            java.nio.file.Path uploadPath = java.nio.file.Paths.get(uploadDir).toAbsolutePath();
+            String fileName = System.currentTimeMillis() + "_" + profileImage.getOriginalFilename();
+
+            try {
+                if (!java.nio.file.Files.exists(uploadPath)) {
+                    java.nio.file.Files.createDirectories(uploadPath);
+                }
+                java.nio.file.Path filePath = uploadPath.resolve(fileName);
+                profileImage.transferTo(filePath.toFile());
+                profileImageUrl = "/uploads/" + fileName; // For web access
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Failed to save profile image");
+            }
+        }
+
+        UserModel user = new UserModel();
+        user.setUsername(username);
+        user.setEmail(email);
+        user.setPassword(passwordEncoder.encode(password));
+        user.setProfileImageUrl(profileImageUrl);
+
         UserModel savedUser = myAppUserRepository.save(user);
         return ResponseEntity.ok(savedUser);
     }
