@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.summary.eSummarizer.Model.UserModel;
 import com.summary.eSummarizer.Repository.MyAppUserRepository;
 
+import java.time.LocalDateTime;
+
 @RestController
 public class RegistrationController {
 
@@ -23,8 +25,12 @@ public class RegistrationController {
 
     @PostMapping(value = "/signup", consumes = "multipart/form-data")
     public ResponseEntity<?> createUser(
+            @RequestParam("firstname") String firstname,
+            @RequestParam(value = "middlename", required = false) String middlename,
+            @RequestParam("lastname") String lastname,
             @RequestParam("username") String username,
             @RequestParam("email") String email,
+            @RequestParam("phone") String phone,
             @RequestParam("password") String password,
             @RequestParam(value = "profileImage", required = false) MultipartFile profileImage) {
 
@@ -40,7 +46,7 @@ public class RegistrationController {
 
         String profileImageUrl = null;
         if (profileImage != null && !profileImage.isEmpty()) {
-            String uploadDir = "uploads";
+            String uploadDir = "src/main/resources/static/uploads";
             java.nio.file.Path uploadPath = java.nio.file.Paths.get(uploadDir).toAbsolutePath();
             String fileName = System.currentTimeMillis() + "_" + profileImage.getOriginalFilename();
 
@@ -59,8 +65,13 @@ public class RegistrationController {
         }
 
         UserModel user = new UserModel();
+        user.setFirstName(firstname);
+        user.setMiddleName(middlename);
+        user.setLastName(lastname);
+        user.setCreatedAt(LocalDateTime.now());
         user.setUsername(username);
         user.setEmail(email);
+        user.setPhone(phone);
         user.setPassword(passwordEncoder.encode(password));
         user.setProfileImageUrl(profileImageUrl);
 
