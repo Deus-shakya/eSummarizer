@@ -1,9 +1,16 @@
 package com.summary.eSummarizer.Controller;
 
 import com.summary.eSummarizer.Model.UserModel;
+import com.summary.eSummarizer.Repository.MyAppUserRepository;
 import com.summary.eSummarizer.Service.MyAppUserService;
 import com.summary.eSummarizer.Service.UserOperationService;
+
+import java.time.LocalDateTime;
+import java.util.Optional;
+
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,12 +25,14 @@ public class UserController {
 
     @Autowired
     private UserOperationService userOperationService;
+    @Autowired
+    private MyAppUserRepository myAppUserRepository;
 
     @GetMapping
     public ResponseEntity<UserModel> getUserProfile() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserModel user = userService.findByEmail(auth.getName());
-        System.out.println("thisIsUser: "+user);
+        System.out.println("thisIsUser: " + user);
         return ResponseEntity.ok(user);
     }
 
@@ -47,5 +56,31 @@ public class UserController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+
+    @PutMapping("/updateprofile")
+    public ResponseEntity<?> updateProfile(@RequestParam("firstname") String firstname,
+            @RequestParam(value = "middlename", required = false) String middlename,
+            @RequestParam("lastname") String lastname,
+            @RequestParam("username") String username,
+            @RequestParam("email") String email,
+            @RequestParam("phone") String phone) {
+        Optional<UserModel> optionalUser = myAppUserRepository.findByEmail(email);
+        if (!optionalUser.isPresent()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("User doesnt Exist!");
+        }
+        UserModel user = optionalUser.get();
+        user.setFirstName(firstname);
+        user.setMiddleName(middlename);
+        user.setLastName(lastname);
+        user.setUsername(username);
+        user.setEmail(email);
+        user.setPhone(phone);
+        user.setUpdatedAt(LocalDateTime.now());
+
+        myAppUserRepository.save(user);
+        return ResponseEntity.ok("User updated successfully!");
+
     }
 }

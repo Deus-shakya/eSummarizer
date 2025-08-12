@@ -26,10 +26,9 @@ document.addEventListener("DOMContentLoaded", async (e) => {
 
     displayProfileImage.src = data.profileImageUrl;
 
-    // Pre-fill form fields
-    document.getElementById("firstName").value = data.firstName || "";
-    document.getElementById("middleName").value = data.middleName || "";
-    document.getElementById("lastName").value = data.lastName || "";
+    document.getElementById("firstname").value = data.firstName || "";
+    document.getElementById("middlename").value = data.middleName || "";
+    document.getElementById("lastname").value = data.lastName || "";
     document.getElementById("username").value = data.username || "";
     document.getElementById("email").value = data.email || "";
     document.getElementById("phone").value = data.phone || "";
@@ -37,8 +36,26 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     console.error(error);
   }
 });
-// Profile form submission
-document.getElementById("profileForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-  alert("Profile updated successfully!");
-});
+
+document
+  .getElementById("profileForm")
+  .addEventListener("submit", async function (e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    console.log(formData);
+    try {
+      const response = await fetch("/api/profile/updateprofile", {
+        method: "PUT",
+        body: formData,
+      });
+      if (!response.ok) {
+        alert("Error during fetch");
+        return;
+      }
+      alert("Profile updated successfully!");
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  });
