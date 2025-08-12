@@ -20,12 +20,21 @@
       <div class="profile-card">
         <div class="profile-header">
           <div class="profile-avatar" id="avatar">
-            <img
-              id="profileImage"
-              src="default.jpg"
-              alt="Profile Image"
-              style="width: 100%; height: 100%; border-radius: 50%"
-            />
+            <div class="avatar-wrapper">
+              <img
+                id="profileImage"
+                src="default.jpg"
+                alt="Profile Image"
+                style="
+                  width: 100%;
+                  height: 100%;
+                  border-radius: 50%;
+                  cursor: pointer;
+                "
+                onclick="openAvatarModal()"
+              />
+              <span class="avatar-tooltip">Change Avatar</span>
+            </div>
           </div>
           <div class="profile-info">
             <h1 id="displayName">------</h1>
@@ -50,7 +59,11 @@
       </div>
 
       <div class="section-card">
-        <div class="section-header" onclick="toggleAccountForm()">
+        <div
+          class="section-header"
+          id="accountHeader"
+          onclick="toggleAccountForm()"
+        >
           <h2 class="section-title">
             <div class="title-left">Account Information</div>
             <span class="dropdown-arrow">▼</span>
@@ -117,6 +130,7 @@
                   class="form-input"
                   value=""
                   placeholder="Enter your email address"
+                  readonly
                 />
               </div>
               <div class="form-group">
@@ -147,7 +161,136 @@
           </form>
         </div>
       </div>
+
+      <div class="section-card">
+        <div
+          class="section-header"
+          id="passwordHeader"
+          onclick="togglePasswordForm()"
+        >
+          <h2 class="section-title">
+            <div class="title-left">Change Password</div>
+            <span class="dropdown-arrow">▼</span>
+          </h2>
+        </div>
+        <div class="form-content" id="passwordFormContent">
+          <form id="passwordForm" class="enhanced-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="currentPassword"
+                  >Current Password</label
+                >
+                <input
+                  type="password"
+                  id="currentPassword"
+                  name="currentPassword"
+                  class="form-input"
+                  placeholder="Enter current password"
+                  required
+                  autocomplete="current-password"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="newPassword">New Password</label>
+                <input
+                  type="password"
+                  id="newPassword"
+                  name="newPassword"
+                  class="form-input"
+                  placeholder="Enter new password"
+                  required
+                  autocomplete="new-password"
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="confirmPassword"
+                  >Confirm New Password</label
+                >
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  class="form-input"
+                  placeholder="Re-enter new password"
+                  required
+                  autocomplete="new-password"
+                />
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary enhanced-btn">
+                Change Password
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary enhanced-btn"
+                onclick="resetPasswordForm()"
+              >
+                Reset
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div
+          class="section-header"
+          id="othersHeader"
+          onclick="toggleOthersForm()"
+        >
+          <h2 class="section-title">
+            <div class="title-left">Others</div>
+            <span class="dropdown-arrow">▼</span>
+          </h2>
+        </div>
+        <div class="form-content" id="othersFormContent">
+          <form id="othersForm" class="enhanced-form">
+            <div class="form-actions">
+              <button
+                type="button"
+                class="btn btn-danger enhanced-btn"
+                style="
+                  background: linear-gradient(135deg, #e53935 0%, #e35d5b 100%);
+                  color: #fff;
+                "
+                onclick="deleteAccount()"
+              >
+                Delete Account
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
+
+    <!-- Avatar Edit Modal -->
+    <div id="avatarModal" class="modal-overlay">
+      <div class="modal-content">
+        <h2>Edit Profile Image</h2>
+        <form id="avatarForm">
+          <div class="modal-img-preview">
+            <img id="avatarPreview" src="default.jpg" alt="Preview" />
+          </div>
+          <input type="file" id="avatarInput" name="avatar" accept="image/*" />
+          <div class="modal-actions">
+            <button type="submit" class="btn btn-primary enhanced-btn">
+              Upload
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary enhanced-btn"
+              onclick="closeAvatarModal()"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <script src="/NewUI/JS/navbar.js"></script>
     <script src="/NewUI/JS/profile.js"></script>
   </body>
