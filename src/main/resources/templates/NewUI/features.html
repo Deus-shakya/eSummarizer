@@ -1,78 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Features - SummarizeBot</title>
     <link rel="stylesheet" href="/NewUI/CSS/navbar.css" />
     <link rel="stylesheet" href="/NewUI/CSS/features.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
-<!-- Navigation Bar -->
-<div th:replace="NewUI/navbar :: navbar"></div>
-<header class="hero">
-    <div class="hero-content">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <div th:replace="NewUI/navbar :: navbar"></div>
+    <header class="hero">
+      <div class="hero-content">
         <h1 class="hero-title">Explore SummarizeBot's Features</h1>
-        <p class="hero-subtitle">Designed to simplify your reading and maximize understanding through intelligent summarization.</p>
-    </div>
-</header>
+        <p class="hero-subtitle">
+          Designed to simplify your reading and maximize understanding through
+          intelligent summarization.
+        </p>
+      </div>
+    </header>
 
-<section class="features-overview">
-    <div class="features-grid">
+    <section class="features-overview">
+      <div class="features-grid">
         <div class="feature-box">
-            <h3>Abstractive Summarization</h3>
-            <p>Generates summaries using natural language that may include rephrased content, just like how a human would summarize.</p>
+          <h3>Abstractive Summarization</h3>
+          <p>
+            Generates summaries using natural language that may include
+            rephrased content, just like how a human would summarize.
+          </p>
         </div>
         <div class="feature-box">
-            <h3>Extractive Summarization</h3>
-            <p>Selects the most important sentences directly from the original text using graph-based ranking algorithms.</p>
+          <h3>Extractive Summarization</h3>
+          <p>
+            Selects the most important sentences directly from the original text
+            using graph-based ranking algorithms.
+          </p>
         </div>
         <div class="feature-box">
-            <h3>Graph Visualizer</h3>
-            <p>Interactive D3.js graphs show relationships between sentences and how scores are distributed.</p>
+          <h3>Graph Visualizer</h3>
+          <p>
+            Interactive D3.js graphs show relationships between sentences and
+            how scores are distributed.
+          </p>
         </div>
         <div class="feature-box">
-            <h3>Lemmatization Viewer</h3>
-            <p>See how input words are normalized before processing — improves accuracy and transparency.</p>
+          <h3>Lemmatization Viewer</h3>
+          <p>
+            See how input words are normalized before processing — improves
+            accuracy and transparency.
+          </p>
         </div>
         <div class="feature-box">
-            <h3>Keyword Extraction</h3>
-            <p>Highlight the most meaningful words in the text, extracted using NLP techniques like TF-IDF or TextRank.</p>
+          <h3>Keyword Extraction</h3>
+          <p>
+            Highlight the most meaningful words in the text, extracted using NLP
+            techniques like TF-IDF or TextRank.
+          </p>
         </div>
         <div class="feature-box">
-            <h3>Real-Time Preview</h3>
-            <p>Changes in summary or input text update instantly — powered by fast backend integration.</p>
+          <h3>Real-Time Preview</h3>
+          <p>
+            Changes in summary or input text update instantly — powered by fast
+            backend integration.
+          </p>
         </div>
-    </div>
-</section>
+      </div>
+    </section>
 
-<section class="advanced-feature-section">
-    <h2 class="section-heading">🔬 Under the Hood</h2>
-    <div class="advanced-grid">
+    <section class="advanced-feature-section">
+      <h2 class="section-heading">🔬 Under the Hood</h2>
+      <div class="advanced-grid">
         <div class="advanced-card">
-            <h4>Transformer-Based Models</h4>
-            <p>We use cutting-edge models like T5 and BERT, fine-tuned on large datasets for summarization.</p>
+          <h4>Transformer-Based Models</h4>
+          <p>
+            We use cutting-edge models like T5 and BERT, fine-tuned on large
+            datasets for summarization.
+          </p>
         </div>
         <div class="advanced-card">
-            <h4>Graph Construction</h4>
-            <p>Sentences are treated as nodes; edges are based on semantic or cosine similarity. It fuels the extractive engine.</p>
+          <h4>Graph Construction</h4>
+          <p>
+            Sentences are treated as nodes; edges are based on semantic or
+            cosine similarity. It fuels the extractive engine.
+          </p>
         </div>
         <div class="advanced-card">
-            <h4>Importance Scoring</h4>
-            <p>Custom scoring algorithm ranks each sentence's weight using principles similar to PageRank.</p>
+          <h4>Importance Scoring</h4>
+          <p>
+            Custom scoring algorithm ranks each sentence's weight using
+            principles similar to PageRank.
+          </p>
         </div>
         <div class="advanced-card">
-            <h4>Preprocessing Pipeline</h4>
-            <p>Includes tokenization, lowercasing, stopword removal, and lemmatization to enhance the summarization quality.</p>
+          <h4>Preprocessing Pipeline</h4>
+          <p>
+            Includes tokenization, lowercasing, stopword removal, and
+            lemmatization to enhance the summarization quality.
+          </p>
         </div>
-    </div>
-</section>
+      </div>
+    </section>
 
-<section class="footer-section">
-    <p>Explore more on the <a href="#" onclick="goToHome()">main page</a>.</p>
-</section>
-<script src="/NewUI/JS/navbar.js"></script>
-<script src="/NewUI/JS/features.js"></script>
-</body>
+    <section class="footer-section">
+      <p>Explore more on the <a href="/NewUI/index">main page</a>.</p>
+    </section>
+    <script src="/NewUI/JS/navbar.js"></script>
+    <script src="/NewUI/JS/features.js"></script>
+  </body>
 </html>
