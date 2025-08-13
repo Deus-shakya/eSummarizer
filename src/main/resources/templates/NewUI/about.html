@@ -1,77 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About - SummarizeBot</title>
-    <link rel="stylesheet" href="/NewUI/CSS/navbar.css"/>
+    <link rel="stylesheet" href="/NewUI/CSS/navbar.css" />
 
     <link rel="stylesheet" href="/NewUI/CSS/about.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
-<!-- Navigation Bar -->
-<div th:replace="NewUI/navbar :: navbar"></div>
-<header class="hero-section">
-    <div class="hero-content">
-        <h1 class="hero-title">Meet <span>SummarizeBot</span></h1>
-        <p class="hero-subtitle">AI-powered summarization to make your reading smarter, faster, and efficient.</p>
-    </div>
-</header>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <div th:replace="NewUI/navbar :: navbar"></div>
+    <header class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">Meet Gistify</h1>
+        <p class="hero-subtitle">
+          AI-powered summarization to make your reading smarter, faster, and
+          efficient.
+        </p>
+      </div>
+    </header>
 
-<section class="features-section">
-    <h2 class="section-heading">🚀 Key Features</h2>
-    <div class="features-grid">
+    <section class="features-section">
+      <h2 class="section-heading">🚀 Key Features</h2>
+      <div class="features-grid">
         <div class="feature-card">
-            <div class="icon">🧠</div>
-            <h3>AI Summarization</h3>
-            <p>Leverages state-of-the-art models like T5 to generate human-like summaries from complex content.</p>
+          <div class="icon">🧠</div>
+          <h3>AI Summarization</h3>
+          <p>
+            Leverages state-of-the-art models like T5 to generate human-like
+            summaries from complex content.
+          </p>
         </div>
         <div class="feature-card">
-            <div class="icon">📊</div>
-            <h3>Graph Visuals</h3>
-            <p>See relationships between sentences with interactive D3.js visualizations.</p>
+          <div class="icon">📊</div>
+          <h3>Graph Visuals</h3>
+          <p>
+            See relationships between sentences with interactive D3.js
+            visualizations.
+          </p>
         </div>
         <div class="feature-card">
-            <div class="icon">💡</div>
-            <h3>Importance Scoring</h3>
-            <p>Each sentence is ranked with intelligent scoring methods like PageRank.</p>
+          <div class="icon">💡</div>
+          <h3>Importance Scoring</h3>
+          <p>
+            Each sentence is ranked with intelligent scoring methods like
+            PageRank.
+          </p>
         </div>
         <div class="feature-card">
-            <div class="icon">📝</div>
-            <h3>Text Preprocessing</h3>
-            <p>Lemmatization, stopword removal, and tokenization — all visualized in real-time.</p>
+          <div class="icon">📝</div>
+          <h3>Text Preprocessing</h3>
+          <p>
+            Lemmatization, stopword removal, and tokenization — all visualized
+            in real-time.
+          </p>
         </div>
-    </div>
-</section>
+      </div>
+    </section>
 
-<section class="how-it-works">
-    <h2 class="section-heading">⚙️ How It Works</h2>
-    <ol class="steps">
+    <section class="how-it-works">
+      <h2 class="section-heading">⚙️ How It Works</h2>
+      <ol class="steps">
         <li>
-            <h4>1. Input Text</h4>
-            <p>You paste or upload a long piece of text (news, documents, articles).</p>
+          <h4>1. Input Text</h4>
+          <p>
+            You paste or upload a long piece of text (news, documents,
+            articles).
+          </p>
         </li>
         <li>
-            <h4>2. NLP Preprocessing</h4>
-            <p>The system cleans and lemmatizes text to prepare for summarization.</p>
+          <h4>2. NLP Preprocessing</h4>
+          <p>
+            The system cleans and lemmatizes text to prepare for summarization.
+          </p>
         </li>
         <li>
-            <h4>3. Graph Construction</h4>
-            <p>A graph is formed where sentences are nodes, and similarity forms the edges.</p>
+          <h4>3. Graph Construction</h4>
+          <p>
+            A graph is formed where sentences are nodes, and similarity forms
+            the edges.
+          </p>
         </li>
         <li>
-            <h4>4. Summarization</h4>
-            <p>The model generates an accurate and concise version of the original content.</p>
+          <h4>4. Summarization</h4>
+          <p>
+            The model generates an accurate and concise version of the original
+            content.
+          </p>
         </li>
-    </ol>
-</section>
+      </ol>
+    </section>
 
-<section class="footer-section">
-    <p>Built with ❤️ by the SummarizeBot team.</p>
-    <p><a href="#" onclick="goToHome()">← Back to Home</a></p>
-</section>
-<script src="/NewUI/JS/navbar.js"></script>
-<script src="/NewUI/JS/about.js"></script>
-</body>
+    <section class="footer-section">
+      <p>Built by TheMiniDyno.</p>
+      <p><a href="/NewUI/index">← Back to Home</a></p>
+    </section>
+    <script src="/NewUI/JS/navbar.js"></script>
+    <script src="/NewUI/JS/about.js"></script>
+  </body>
 </html>

@@ -1,10 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
   const toggle = document.getElementById("theme-toggle");
 
-  if (localStorage.getItem("theme") === "dark") {
+  // Detect system preference if no user choice
+  if (!localStorage.getItem("theme")) {
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      document.body.classList.add("dark-mode");
+      if (toggle) toggle.textContent = "☀️";
+    } else {
+      document.body.classList.remove("dark-mode");
+      if (toggle) toggle.textContent = "🌙";
+    }
+  } else if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark-mode");
     if (toggle) toggle.textContent = "☀️";
   } else {
+    document.body.classList.remove("dark-mode");
     if (toggle) toggle.textContent = "🌙";
   }
 
@@ -18,6 +28,16 @@ document.addEventListener("DOMContentLoaded", function () {
       toggle.textContent = "🌙";
     }
   });
+
+  // Listen for system theme changes if no user choice
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", (e) => {
+      if (!localStorage.getItem("theme")) {
+        document.body.classList.toggle("dark-mode", e.matches);
+        if (toggle) toggle.textContent = e.matches ? "☀️" : "🌙";
+      }
+    });
 
   // Hamburger menu toggle
   const mobileToggle = document.getElementById("mobile-menu-toggle");

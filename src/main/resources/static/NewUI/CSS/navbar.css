@@ -35,7 +35,7 @@
             var(--color-primary, #667eea) 0%,
             var(--color-primary-dark, #764ba2) 100%
     );
-    --green-button-background:linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+    --green-button-background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
     /* Fonts */
     --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
@@ -75,18 +75,20 @@ body.dark-mode {
     --color-primary: #8faaff;
     --color-primary-dark: #4b5b8a;
     --color-accent: #cbd5e1;
-    --color-text: #f1f5f9;
+    --color-text: hsl(0,0%,95%);
     --placeholder: rgba(180, 180, 180, 0.4);
     --color-bg: #181a20;
-    --color-bg-glass: rgba(24, 26, 32, 0.95);
-    --color-border: #23272f;
-    --primary-gradient-background: linear-gradient(135deg, #2c3e50 0%, #4a6072 100%);
-    --green-button-background:linear-gradient(135deg, #48bb78 0%, #38a169 100%)
+    --color-bg-glass: hsl(210, 20%, 16%);
+
+    --color-border: hsl(214, 12%, 27%);
+    --primary-gradient-background: hsl(214, 25%, 11%);
+    --green-button-background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+    --gradient-background:linear-gradient(135deg, #667eea00 0%, #764ba2b0 100%);
 }
 
 /* Navbar Styles */
 .navbar {
-    background: var(--color-bg-glass);
+    background: var(--primary-gradient-background);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--color-border);
     padding: 0 20px;
@@ -181,11 +183,7 @@ body.dark-mode {
 
 .btn-primary {
     padding: 8px 20px;
-    background: linear-gradient(
-            135deg,
-            var(--color-primary) 0%,
-            var(--color-primary-dark) 100%
-    );
+    background:var(--gradient-background);
     color: white;
     border: none;
     border-radius: var(--radius-lg);
