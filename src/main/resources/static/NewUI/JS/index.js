@@ -60,6 +60,11 @@ function clearAllTimeouts() {
 
 // type writer function
 function typeWriter(text, element, index, speed) {
+  // If the text contains HTML tags, render it directly
+  if (/<ul>|<li>/.test(text)) {
+    element.innerHTML = text;
+    return;
+  }
   if (isClearing) return;
   if (index < text.length) {
     element.innerHTML += text.charAt(index);

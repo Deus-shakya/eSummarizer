@@ -29,6 +29,7 @@ public class SummarizationController {
         }
 
         SummaryInfo summary = summarizer.summarize(text);
+        System.out.println("This is from the controller of summarize: "+ summary);
         return ResponseEntity.ok(summary);
     }
 

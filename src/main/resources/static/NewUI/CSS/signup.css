@@ -84,7 +84,7 @@ body {
 }
 
 .auth-btn {
-    background: var(--gradient-background);
+    background: var(--gradient-btn-color);
     color: var(--color-text);
     border: none;
     padding: 15px 20px;

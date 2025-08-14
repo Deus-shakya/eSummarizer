@@ -75,7 +75,6 @@ public class TextRankSummarizer {
         // Select the top sentences for the summary
         List<String> summarizedSentences = summarySelector.selectTopSentences(scores, numSentences, originalSentences,
                 processedSentences);
-
         // Prepare the ranking and summary information
         List<SentenceRank> sentenceRanks = new ArrayList<>();
         for (int i = 0; i < originalSentences.size(); i++) {
