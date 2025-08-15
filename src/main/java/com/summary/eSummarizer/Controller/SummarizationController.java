@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class SummarizationController {
 
     @Autowired
-    private TextRankSummarizer summarizer;
+    private TextRankSummarizer textRankSummarizer;
 
     @PostMapping("/summarize")
     public ResponseEntity<?> summarize(@RequestBody String text) {
@@ -28,7 +28,7 @@ public class SummarizationController {
             }
         }
 
-        SummaryInfo summary = summarizer.summarize(text);
+        SummaryInfo summary = textRankSummarizer.summarize(text);
         System.out.println("This is from the controller of summarize: "+ summary);
         return ResponseEntity.ok(summary);
     }

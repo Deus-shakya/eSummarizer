@@ -1,5 +1,9 @@
 const modeButtons = document.querySelectorAll(".mode-btn");
-let currentMode = "";
+const reductionRate = document.getElementById("reductionRate");
+const sentenceCount = document.getElementById("sentenceCount");
+const wordsCount = document.getElementById("wordsCount");
+
+let currentMode = "paragraph"; //for default
 modeButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
     modeButtons.forEach((b) => b.classList.remove("active"));
@@ -64,8 +68,17 @@ async function summarize() {
 
     const data = await response.json();
     const result = config.parseResponse(data) || "No summary available.";
-    console.log(result);
-
+    if (currentMode == "paragraph" || currentMode == "bullets") {
+      reductionRate.innerHTML = `Reduction Rate: ${(
+        data.reductionRate * 100
+      ).toFixed(2)}%`;
+      wordsCount.innerHTML = `Summarized word count: ${data.summarizedWordCount}`;
+      sentenceCount.innerHTML = `Summarized sentence count: ${data.summarizedSentenceCount}`;
+    } else {
+      reductionRate.innerHTML = "";
+      wordsCount.innerHTML = "";
+      sentenceCount.innerHTML = "";
+    }
     clearAllTimeouts();
     outputText.innerHTML = "";
     typeWriter(result, outputText, 0, 1);

@@ -68,7 +68,7 @@ public class SecurityConfig {
                             "/api/summarization", "/api/summarization/summarize","/api/summarization/summarize-abs",
                             "/OldUI/index", "/OldUI/**", // OldUI templates and resources
                             "/NewUI/index", "/NewUI/**", // NewUI templates and resources
-                            "/static/OldUI/**", "/static/NewUI/**" // Static resources
+                            "/static/OldUI/**", "/static/NewUI/**","/api/summarize/upload" // Static resources
                     ).permitAll();
                     registry.requestMatchers("/summarize").permitAll();
                     registry.requestMatchers("/api/profile/**").authenticated();
