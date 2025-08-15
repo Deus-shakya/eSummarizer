@@ -9,6 +9,9 @@ function toggleSection(headerId, contentId) {
   if (header && formContent) {
     header.classList.toggle("active");
     formContent.classList.toggle("active");
+    setTimeout(() => {
+      formContent.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 300);
   }
 }
 

@@ -22,7 +22,7 @@
   --color-primary-dark: #764ba2;
   --color-accent: #4a5568;
   --color-text: #2d3748;
-  --color-bg-glass: rgba(255, 255, 255, 1);
+  --color-bg-glass: hsl(0, 0%, 95%);
   --color-border: #e2e8f0;
   --placeholder: rgba(100, 100, 100, 0.5);
 
