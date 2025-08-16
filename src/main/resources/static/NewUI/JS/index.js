@@ -28,41 +28,42 @@ lengthSlider.addEventListener("input", (e) => {
   summaryLength = parseInt(e.target.value);
 });
 
-// File upload: send file to backend
-fileInput.addEventListener("change", async (e) => {
-  alert("Only for Paragraph mode!");
-  if (confirm("Is MODE: Paragraph?")) {
-    const file = e.target.files[0];
-    if (file) {
-      alert("Uploading....");
-      const formData = new FormData();
-      formData.append("file", file);
+if (fileInput) {
+  fileInput.addEventListener("change", async (e) => {
+    alert("Only for Paragraph mode!");
+    if (confirm("Is MODE: Paragraph?")) {
+      const file = e.target.files[0];
+      if (file) {
+        alert("Uploading....");
+        const formData = new FormData();
+        formData.append("file", file);
 
-      try {
-        const response = await fetch("/api/summarize/upload", {
-          method: "POST",
-          body: formData,
-        });
+        try {
+          const response = await fetch("/api/summarize/upload", {
+            method: "POST",
+            body: formData,
+          });
 
-        if (!response.ok) {
-          throw new Error("File upload failed");
+          if (!response.ok) {
+            throw new Error("File upload failed");
+          }
+
+          const result = await response.json();
+          outputText.innerHTML = "";
+          const summary = result.summarizedText;
+          clearAllTimeouts();
+          typeWriter(summary, outputText, 0, 1);
+
+          alert("File uploaded and processed!");
+          e.target.value = "";
+        } catch (error) {
+          alert("Error uploading file: " + error.message);
+          e.target.value = "";
         }
-
-        const result = await response.json();
-        outputText.innerHTML = "";
-        const summary = result.summarizedText;
-        clearAllTimeouts();
-        typeWriter(summary, outputText, 0, 1);
-
-        alert("File uploaded and processed!");
-        e.target.value = "";
-      } catch (error) {
-        alert("Error uploading file: " + error.message);
-        e.target.value = "";
       }
     }
-  }
-});
+  });
+}
 
 // Event listeners
 inputText.addEventListener("input", updateWordCount);

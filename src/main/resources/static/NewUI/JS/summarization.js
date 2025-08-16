@@ -61,7 +61,7 @@ async function summarize() {
     });
 
     if (response.status === 401) {
-      alert("Login to summarize more than 200 words.");
+      alert("Login to get full access.");
       window.location.href = "/NewUI/login";
       return;
     }

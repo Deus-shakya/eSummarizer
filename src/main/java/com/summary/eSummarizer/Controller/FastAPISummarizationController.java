@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.summary.eSummarizer.DTO.SummarizationRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -20,7 +22,12 @@ public class FastAPISummarizationController {
 
 
     @PostMapping("/summarize-abs")
-    public Mono<ResponseEntity<Map<String,String>>> summarize(@RequestBody SummarizationRequest request) {
+    public Mono<ResponseEntity<Map<String, String>>> summarize(@RequestBody SummarizationRequest request) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated() || authentication.getPrincipal().equals("anonymousUser")) {
+            return Mono.just(ResponseEntity.status(401).body(Map.of("Error", "Login to Classify the text")));
+        }
         return webClient.post()
                 .uri("/api/v1/summarize")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -30,11 +37,11 @@ public class FastAPISummarizationController {
                 .map(responseBody -> {
                     try {
                         JsonNode jsonNode = objectMapper.readTree(responseBody);
-                        System.out.println("this is from fastAPIReturned to spring: "+jsonNode);
+                        System.out.println("this is from fastAPIReturned to spring: " + jsonNode);
                         String summary = jsonNode.get("summary").asText();
-                        return ResponseEntity.ok(Map.of("summarizedText",summary));
+                        return ResponseEntity.ok(Map.of("summarizedText", summary));
                     } catch (Exception e) {
-                        return ResponseEntity.internalServerError().body(Map.of("Error","Failed to process the data"));
+                        return ResponseEntity.internalServerError().body(Map.of("Error", "Failed to process the data"));
 
                     }
                 });
