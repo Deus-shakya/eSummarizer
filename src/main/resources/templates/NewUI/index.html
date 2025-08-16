@@ -57,7 +57,10 @@
               placeholder="Enter or paste your text here and press 'Summarize' to get summary..."
             ></textarea>
 
-            <div class="upload-section">
+            <div
+              class="upload-section"
+              th:if="${#authorization.expression('isAuthenticated()')}"
+            >
               <label class="upload-btn" for="fileInput">
                 <svg
                   width="16"

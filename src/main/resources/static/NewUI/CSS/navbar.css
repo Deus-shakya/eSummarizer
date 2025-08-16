@@ -235,6 +235,19 @@ body.dark-mode {
   transform: translateY(-10px) rotate(-45deg);
 }
 
+#theme-toggle {
+  display: flex;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  width: 68px;
+
+  /*
+  justify-content: center;
+ 
+  width: 70px; */
+}
+
 /* Responsive Navbar */
 @media (max-width: 890px) {
   .nav-links {
@@ -251,6 +264,7 @@ body.dark-mode {
     transition: transform 0.3s ease-in-out;
     z-index: 999;
     height: 100vh;
+    align-items: center;
   }
 
   .nav-links.open {

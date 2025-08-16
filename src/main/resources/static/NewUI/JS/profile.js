@@ -11,7 +11,7 @@ function toggleSection(headerId, contentId) {
     formContent.classList.toggle("active");
     setTimeout(() => {
       formContent.scrollIntoView({ behavior: "smooth", block: "center" });
-    }, 300);
+    }, 250);
   }
 }
 
