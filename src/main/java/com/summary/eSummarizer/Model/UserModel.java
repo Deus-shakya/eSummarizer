@@ -21,8 +21,13 @@ public class UserModel {
     @Column(name = "last_name")
     private String lastName;
 
-
     private String username;
+
+    @Column(name = "summary_count")
+    private Long summary_count = 0L;
+
+    @Column(name = "word_count")
+    private Long wordCount = 0L;
 
     @Column(unique = true)
     private String email;
@@ -128,5 +133,21 @@ public class UserModel {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Long getSummary_count() {
+        return summary_count;
+    }
+
+    public void setSummary_count(Long summary_count) {
+        this.summary_count = summary_count;
+    }
+
+    public Long getWordCount() {
+        return wordCount;
+    }
+
+    public void setWordCount(Long wordCount) {
+        this.wordCount = wordCount;
     }
 }

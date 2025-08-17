@@ -42,7 +42,6 @@ public class FastAPISummarizationController {
                         return ResponseEntity.ok(Map.of("summarizedText", summary));
                     } catch (Exception e) {
                         return ResponseEntity.internalServerError().body(Map.of("Error", "Failed to process the data"));
-
                     }
                 });
     }

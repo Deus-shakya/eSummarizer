@@ -48,4 +48,11 @@ public class MyAppUserService implements UserDetailsService {
         user.setPassword(newPassword);
         repository.save(user);
     }
+
+    public void updateSummaryCount(String email, int wordCount) {
+        UserModel user = findByEmail(email);
+        user.setSummary_count(user.getSummary_count() + 1);
+        user.setWordCount(user.getWordCount() + wordCount);
+        repository.save(user);
+    }
 }
