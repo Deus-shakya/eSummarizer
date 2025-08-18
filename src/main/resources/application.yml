@@ -6,7 +6,7 @@ server:
 
 spring:
   profiles:
-    active: docker
+    active: local
   datasource:
     hikari:
       initialization-fail-timeout: -1
