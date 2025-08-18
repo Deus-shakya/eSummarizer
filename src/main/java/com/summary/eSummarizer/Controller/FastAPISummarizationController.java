@@ -3,6 +3,7 @@ package com.summary.eSummarizer.Controller;// ...existing code...
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.summary.eSummarizer.DTO.SummarizationRequest;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -17,15 +18,21 @@ import java.util.Map;
 @RequestMapping("/api/summarization")
 public class FastAPISummarizationController {
 
-    private final WebClient webClient = WebClient.create("http://localhost:8000");
+    private final WebClient webClient;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
+    public FastAPISummarizationController(@Value("${external.api.base-url}") String baseUrl) {
+        this.webClient = WebClient.builder()
+                .baseUrl(baseUrl)
+                .build();
+    }
 
     @PostMapping("/summarize-abs")
     public Mono<ResponseEntity<Map<String, String>>> summarize(@RequestBody SummarizationRequest request) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null || !authentication.isAuthenticated() || authentication.getPrincipal().equals("anonymousUser")) {
+        if (authentication == null || !authentication.isAuthenticated()
+                || authentication.getPrincipal().equals("anonymousUser")) {
             return Mono.just(ResponseEntity.status(401).body(Map.of("Error", "Login to Classify the text")));
         }
         return webClient.post()
@@ -46,4 +53,3 @@ public class FastAPISummarizationController {
                 });
     }
 }
-

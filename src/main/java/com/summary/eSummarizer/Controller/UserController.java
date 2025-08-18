@@ -40,7 +40,6 @@ public class UserController {
     public ResponseEntity<UserModel> getUserProfile() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserModel user = userService.findByEmail(auth.getName());
-        System.out.println("thisIsUser: " + user);
         return ResponseEntity.ok(user);
     }
 

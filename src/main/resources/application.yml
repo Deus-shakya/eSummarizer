@@ -5,8 +5,11 @@ server:
     include-binding-errors: always
 
 spring:
+  profiles:
+    active: docker
   datasource:
-    url: jdbc:mysql://localhost:3306/gistify
+    hikari:
+      initialization-fail-timeout: -1
     username: root
     password:
   servlet:
